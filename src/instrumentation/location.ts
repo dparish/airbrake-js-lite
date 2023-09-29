@@ -8,6 +8,7 @@ function getCurrentLocation(): string | null {
 }
 
 export function instrumentLocation(notifier: Notifier): void {
+  // @ts-ignore
   lastLocation = getCurrentLocation();
 
   const oldFn = window.onpopstate;
@@ -17,6 +18,7 @@ export function instrumentLocation(notifier: Notifier): void {
       recordLocation(notifier, url);
     }
     if (oldFn) {
+      // @ts-ignore
       return oldFn.apply(this, arguments);
     }
   };
@@ -30,6 +32,7 @@ export function instrumentLocation(notifier: Notifier): void {
     if (url) {
       recordLocation(notifier, url.toString());
     }
+    // @ts-ignore
     oldPushState.apply(this, arguments);
   };
 }

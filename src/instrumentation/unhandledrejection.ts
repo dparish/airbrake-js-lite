@@ -20,6 +20,7 @@ function onUnhandledrejection(e: any): void {
   if (msg.indexOf && msg.indexOf('airbrake: ') === 0) return;
 
   if (typeof reason !== 'object' || reason.error === undefined) {
+    // @ts-ignore
     this.notify({
       error: reason,
       context: {
@@ -29,5 +30,6 @@ function onUnhandledrejection(e: any): void {
     return;
   }
 
+  // @ts-ignore
   this.notify({ ...reason, context: { unhandledRejection: true } });
 }

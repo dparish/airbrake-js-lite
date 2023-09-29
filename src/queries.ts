@@ -113,6 +113,7 @@ export class QueriesStats {
         ...this._m[keyStr].toJSON(),
       };
 
+      // @ts-ignore
       queries.push(v);
     }
 

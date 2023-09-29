@@ -25,7 +25,7 @@ const ERROR_SETTING = 'errors';
 const APM_SETTING = 'apm';
 
 interface IRemoteConfig {
-  project_id: number;
+  project_id: number | null;
   updated_at: number;
   poll_sec: number;
   config_route: string;
@@ -46,8 +46,8 @@ export class RemoteSettings {
   _opt: IOptions;
   _requester: Requester;
   _data: SettingsData;
-  _origErrorNotifications: boolean;
-  _origPerformanceStats: boolean;
+  _origErrorNotifications: boolean | undefined;
+  _origPerformanceStats: boolean | undefined;
 
   constructor(opt: IOptions) {
     this._opt = opt;
@@ -105,11 +105,11 @@ export class RemoteSettings {
   }
 
   _pollUrl(opt: IOptions): string {
-    const url = this._data.configRoute(opt.remoteConfigHost);
+    const url = this._data.configRoute(opt.remoteConfigHost!);
     let queryParams = '?';
 
     for (const [key, value] of this._entries(NOTIFIER_INFO)) {
-      queryParams += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+      queryParams += `&${encodeURIComponent(key)}=${encodeURIComponent(value!)}`;
     }
 
     return url + queryParams;
@@ -132,6 +132,7 @@ export class RemoteSettings {
   // Polyfill from:
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries#polyfill
   _entries<T>(obj: T): Entries<T> {
+    // @ts-ignore
     const ownProps = Object.keys(obj);
     let i = ownProps.length;
     const resArray = new Array(i);
@@ -188,7 +189,7 @@ export class SettingsData {
     return s.enabled;
   }
 
-  errorHost(): string {
+  errorHost(): string | null {
     const s = this._findSetting(ERROR_SETTING);
     if (s === null) {
       return null;
@@ -197,7 +198,7 @@ export class SettingsData {
     return s.endpoint;
   }
 
-  apmHost(): string {
+  apmHost(): string | null{
     const s = this._findSetting(APM_SETTING);
     if (s === null) {
       return null;
@@ -206,7 +207,7 @@ export class SettingsData {
     return s.endpoint;
   }
 
-  _findSetting(name: string): IRemoteConfigSetting {
+  _findSetting(name: string): IRemoteConfigSetting | null {
     const settings = this._data.settings;
     if (settings === null || settings === undefined) {
       return null;

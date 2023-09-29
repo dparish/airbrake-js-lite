@@ -3,6 +3,7 @@ import { Notifier } from '../notifier';
 export function instrumentFetch(notifier: Notifier): void {
   // tslint:disable-next-line:no-this-assignment
   let oldFetch = window.fetch;
+  // @ts-ignore
   window.fetch = function (
     req: RequestInfo,
     options?: RequestInit
@@ -25,6 +26,7 @@ export function instrumentFetch(notifier: Notifier): void {
     setTimeout(() => notifier._ignoreNextXHR--);
 
     return oldFetch
+      // @ts-ignore
       .apply(this, arguments)
       .then((resp: Response) => {
         state.statusCode = resp.status;

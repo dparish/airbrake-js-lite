@@ -102,6 +102,7 @@ export class RoutesStats {
         ...this._m[keyStr].toJSON(),
       };
 
+      // @ts-ignore
       routes.push(v);
     }
 
@@ -208,6 +209,7 @@ export class RoutesBreakdowns {
         ...this._m[keyStr].toJSON(),
       };
 
+      // @ts-ignore
       routes.push(v);
     }
 

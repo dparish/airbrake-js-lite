@@ -7,7 +7,7 @@ const IGNORED_MESSAGES = [
 ];
 
 export function ignoreNoiseFilter(notice: INotice): INotice | null {
-  let err = notice.errors[0];
+  let err = notice.errors![0];
   if (err.type === '' && IGNORED_MESSAGES.indexOf(err.message) !== -1) {
     return null;
   }

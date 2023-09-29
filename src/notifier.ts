@@ -1,4 +1,3 @@
-import Promise from 'promise-polyfill';
 import { BaseNotifier } from './base_notifier';
 import { windowFilter } from './filter/window';
 import { instrumentConsole } from './instrumentation/console';
@@ -58,8 +57,10 @@ export class Notifier extends BaseNotifier {
       let oldHandler = window.onerror;
       window.onerror = function abOnerror() {
         if (oldHandler) {
+          // @ts-ignore
           oldHandler.apply(this, arguments);
         }
+        // @ts-ignore
         self.onerror.apply(self, arguments);
       };
     }

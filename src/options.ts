@@ -18,8 +18,8 @@ export interface IOptions {
   projectId: number;
   projectKey: string;
   environment?: string;
-  host?: string;
-  apmHost?: string;
+  host?: string | null;
+  apmHost?: string | null;
   remoteConfigHost?: string;
   remoteConfig?: boolean;
   timeout?: number;

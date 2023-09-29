@@ -1,5 +1,3 @@
-import Promise from 'promise-polyfill';
-
 import { IFuncWrapper } from './func_wrapper';
 import { jsonifyNotice } from './jsonify_notice';
 import { INotice } from './notice';
@@ -132,7 +130,7 @@ export class BaseNotifier {
     }
 
     let error = this._processor(err.error);
-    notice.errors.push(error);
+    notice.errors!.push(error);
 
     for (let filter of this._filters) {
       let r = filter(notice);
@@ -177,7 +175,9 @@ export class BaseNotifier {
   }
 
   _sendNotice(notice: INotice): Promise<INotice> {
+    // @ts-ignore
     let body = jsonifyNotice(notice, {
+      // @ts-ignore
       keysBlocklist: this._opt.keysBlocklist,
     });
     if (this._opt.reporter) {
@@ -216,6 +216,7 @@ export class BaseNotifier {
       let fnArgs = Array.prototype.slice.call(arguments);
       let wrappedArgs = client._wrapArguments(fnArgs);
       try {
+        // @ts-ignore
         return fn.apply(this, wrappedArgs);
       } catch (err) {
         client.notify({ error: err, params: { arguments: fnArgs } });
@@ -255,6 +256,7 @@ export class BaseNotifier {
 
   call(fn, ..._args: any[]): any {
     let wrapper = this.wrap(fn);
+    // @ts-ignore
     return wrapper.apply(this, Array.prototype.slice.call(arguments, 1));
   }
 }

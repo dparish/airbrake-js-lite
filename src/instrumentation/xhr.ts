@@ -21,12 +21,14 @@ export function instrumentXHR(notifier: Notifier): void {
     _password?: string
   ): void {
     if (notifier._ignoreNextXHR === 0) {
+      // @ts-ignore
       this.__state = {
         type: 'xhr',
         method,
         url,
       };
     }
+    // @ts-ignore
     oldOpen.apply(this, arguments);
   };
 
@@ -34,17 +36,22 @@ export function instrumentXHR(notifier: Notifier): void {
   XMLHttpRequest.prototype.send = function abSend(_data?: any): void {
     let oldFn = this.onreadystatechange;
     this.onreadystatechange = function (_ev: Event): any {
+      // @ts-ignore
       if (this.readyState === 4 && this.__state) {
+        // @ts-ignore
         recordReq(this);
       }
       if (oldFn) {
+        // @ts-ignore
         return oldFn.apply(this, arguments);
       }
     };
 
+    // @ts-ignore
     if (this.__state) {
       (this as IXMLHttpRequestWithState).__state.date = new Date();
     }
+    // @ts-ignore
     return oldSend.apply(this, arguments);
   };
 }

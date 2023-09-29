@@ -3,7 +3,7 @@ import { Requester } from './api';
 import { request as fetchRequest } from './fetch';
 import { makeRequester as makeNodeRequester } from './node';
 
-export { Requester };
+export type { Requester };
 
 export function makeRequester(opts: IOptions): Requester {
   if (opts.request) {

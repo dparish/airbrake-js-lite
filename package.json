@@ -1,5 +1,5 @@
 {
-  "name": "@subjectwell/shared-ui-utils",
+  "name": "@dparish/airbrake-js-lite",
   "version": "0.0.5",
   "description": "Various utilities for externally-facing apps",
   "private": false,
@@ -7,7 +7,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "repository": "https://github.com/subjectwell/shared-ui-utils.git",
+  "repository": "https://github.com/dparish/airbrake-js-lite.git",
   "exports": {
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
@@ -29,7 +29,6 @@
     "format": "prettier --write ./"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.4",
     "@types/node": "^18.7.9",
     "@types/request": "2.48.8",
     "@typescript-eslint/eslint-plugin": "^5.35.1",

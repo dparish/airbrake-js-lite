@@ -91,6 +91,7 @@ export class QueuesStats {
         ...this._m[keyStr].toJSON(),
       };
 
+      // @ts-ignore
       queues.push(v);
     }
 

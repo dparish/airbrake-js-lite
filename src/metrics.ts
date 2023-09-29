@@ -6,10 +6,10 @@ export interface IMetric {
 }
 
 export class Span {
-  _metric: IMetric;
+  _metric: IMetric | null;
 
   name: string;
-  startTime: Date;
+  startTime: Date | null;
   endTime: Date;
 
   _dur = 0;
@@ -25,8 +25,8 @@ export class Span {
   end(endTime?: Date) {
     this.endTime = endTime ? endTime : new Date();
 
-    this._dur += this.endTime.getTime() - this.startTime.getTime();
-    this._metric._incGroup(this.name, this._dur);
+    this._dur += this.endTime.getTime() - this.startTime!.getTime();
+    this._metric!._incGroup(this.name, this._dur);
     this._metric = null;
   }
 
@@ -35,7 +35,7 @@ export class Span {
       return;
     }
     let now = new Date();
-    this._dur += now.getTime() - this.startTime.getTime();
+    this._dur += now.getTime() - this.startTime!.getTime();
     this.startTime = null;
   }
 

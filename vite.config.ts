@@ -1,3 +1,4 @@
+import typescript from "@rollup/plugin-typescript";
 /// <reference types="vitest" />
 import { defineConfig } from "vite";
 // @ts-ignore
@@ -10,7 +11,7 @@ export default defineConfig({
   },
   build: {
     target: "es2019",
-    minify: false,
+    minify: true,
     sourcemap: true,
     lib: {
       entry: {
@@ -19,12 +20,13 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       output: {
-        preserveModules: true,
       },
       plugins: [
+        // @ts-ignore
+        typescript({
+          exclude: ["**/*.test.ts"],
+        }),
       ],
     },
   },

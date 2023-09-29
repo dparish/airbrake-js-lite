@@ -20,6 +20,7 @@ function parse(err: IError): IStackFrame[] {
     return ErrorStackParser.parse(err);
   } catch (parseErr) {
     if (hasConsole && err.stack) {
+      // @ts-ignore
       console.warn('ErrorStackParser:', parseErr.toString(), err.stack);
     }
   }
@@ -47,6 +48,7 @@ export function espProcessor(err: IError): INoticeError {
       try {
         throw new Error('fake');
       } catch (fakeErr) {
+        // @ts-ignore
         frames = parse(fakeErr);
         frames.shift();
         frames.shift();
