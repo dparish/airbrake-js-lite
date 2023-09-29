@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "lib": ["ESNext", "DOM"],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "declaration": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "Node",
+    "strictPropertyInitialization": false,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "rootDir": "./src",
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["dist/**/*"],
+  "include": ["src/**/*"]
+}
